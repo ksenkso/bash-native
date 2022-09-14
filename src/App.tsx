@@ -1,41 +1,61 @@
 import React, { FC } from 'react';
-import { FlatList, ListRenderItemInfo, SafeAreaView, StatusBar, useColorScheme } from 'react-native';
-
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Quote, QuoteModel } from './components/Quote';
-
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { QuoteModel } from './components/quote/Quote';
+import { QuotesList } from './components/QuotesList';
+import { COLOR_LIGHT_GREY } from './styles/colors';
+import { QuoteSearch } from './components/quote/QuoteSearch';
 
 const quotes: QuoteModel[] = [
   {
     id: 1,
-    date: 'null',
+    date: '14.09.2022',
     rating: -1,
     text: 'хуй',
   },
   {
     id: 2,
-    date: 'null',
+    date: '14.09.2022',
+    rating: 1,
+    text: 'xxx: хуй',
+  },
+  {
+    id: 3,
+    date: '14.09.2022',
+    rating: 1,
+    text: 'xxx: хуй',
+  },
+  {
+    id: 4,
+    date: '14.09.2022',
+    rating: 1,
+    text: 'xxx: хуй',
+  },
+  {
+    id: 5,
+    date: '14.09.2022',
+    rating: 1,
+    text: 'xxx: хуй',
+  },
+  {
+    id: 6,
+    date: '14.09.2022',
     rating: 1,
     text: 'xxx: хуй',
   },
 ];
 
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLOR_LIGHT_GREY,
+  },
+});
+
 const App: FC = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <FlatList data={quotes} renderItem={(item: ListRenderItemInfo<QuoteModel>) => <Quote quote={item.item} />} />
+    <SafeAreaView style={style.container}>
+      <QuoteSearch/>
+      <QuotesList quotes={quotes}/>
     </SafeAreaView>
   );
 };
