@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
-import { COLOR_GREY, COLOR_LIGHT_GREY, COLOR_RIPPLE } from '../../styles/colors';
+import { StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { COLOR_LIGHT_GREY, COLOR_RIPPLE } from '../../styles/colors';
 import React, { FC, PropsWithChildren } from 'react';
+import VectorDrawable from '@klarna/react-native-vector-drawable';
 
 const voteButtonStyle = StyleSheet.create({
   voteButton: {
@@ -8,26 +9,28 @@ const voteButtonStyle = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 4,
     backgroundColor: COLOR_LIGHT_GREY,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
-  voteButtonText: {
-    color: COLOR_GREY,
-    fontSize: 24,
-    lineHeight: 24,
+  voteButtonIcon: {
+    width: 20,
+    height: 16,
   },
 });
 
 export type VoteProps = { onPress: () => void, direction: 'up' | 'down' };
 
 export const VoteButton: FC<PropsWithChildren<VoteProps>> = ({ direction, onPress }) => {
+  const icon = direction === 'up' ? 'ic_vote_plus' : 'ic_vote_minus';
+
   return (
     <TouchableNativeFeedback
       background={TouchableNativeFeedback.Ripple(COLOR_RIPPLE, false)}
       onPress={onPress}
     >
       <View style={voteButtonStyle.voteButton}>
-        <Text style={voteButtonStyle.voteButtonText}>{direction === 'up' ? '+' : '-'}</Text>
+        <VectorDrawable
+          resourceName={icon}
+          style={voteButtonStyle.voteButtonIcon}
+        />
       </View>
     </TouchableNativeFeedback>
   );
